@@ -1,0 +1,8 @@
+.next/
+node_modules/
+public/
+.playwright-mcp/
+*.tsbuildinfo
+next-env.d.ts
+pnpm-lock.yaml
+package-lock.json

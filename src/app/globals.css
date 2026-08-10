@@ -1,0 +1,281 @@
+@import "tailwindcss";
+
+:root {
+  /* Ocean Palette */
+  --cream: #f3f8fb;
+  --cream-dark: #e2edf4;
+  --forest: #123249;
+  --forest-light: #3a7ca5;
+  --orange-accent: #d9784f;
+  --gold-warm: #c9a227;
+
+  /* Glass system — light-mode (Apple frosted glass) */
+  --glass-white: rgba(255, 255, 255, 0.55);
+  --glass-white-strong: rgba(255, 255, 255, 0.75);
+  --glass-border: rgba(255, 255, 255, 0.6);
+  --glass-border-hover: rgba(255, 255, 255, 0.85);
+
+  /* Semantic */
+  --background: var(--cream);
+  --foreground: var(--forest);
+}
+
+@theme inline {
+  --color-cream: var(--cream);
+  --color-cream-dark: var(--cream-dark);
+  --color-forest: var(--forest);
+  --color-forest-light: var(--forest-light);
+  --color-orange-accent: var(--orange-accent);
+  --color-gold-warm: var(--gold-warm);
+  --color-glass-white: var(--glass-white);
+  --color-glass-white-strong: var(--glass-white-strong);
+  --color-glass-border: var(--glass-border);
+  --color-glass-border-hover: var(--glass-border-hover);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --font-headline: var(--font-playfair);
+  --font-serif: var(--font-cormorant);
+  --font-sans: var(--font-inter);
+
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-pulse-glow: pulse-glow 3s ease-in-out infinite;
+  --animate-drift: drift 8s ease-in-out infinite;
+}
+
+/* Marquee scroll */
+@keyframes marquee-scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee-track {
+  animation: marquee-scroll 20s linear infinite;
+  will-change: transform;
+}
+
+/* Keyframes */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes pulse-glow {
+  0%,
+  100% {
+    box-shadow:
+      0 0 20px rgba(217, 120, 79, 0.15),
+      0 0 40px rgba(18, 50, 73, 0.1);
+  }
+  50% {
+    box-shadow:
+      0 0 30px rgba(217, 120, 79, 0.25),
+      0 0 60px rgba(18, 50, 73, 0.15);
+  }
+}
+
+@keyframes drift {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(10px, -15px);
+  }
+  50% {
+    transform: translate(-5px, 10px);
+  }
+  75% {
+    transform: translate(15px, 5px);
+  }
+}
+
+/* Glass utility classes — light-mode frosted glass */
+.glass-panel {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.6),
+    rgba(255, 255, 255, 0.35)
+  );
+  backdrop-filter: blur(20px) saturate(140%);
+  -webkit-backdrop-filter: blur(20px) saturate(140%);
+  border: 1px solid var(--glass-border);
+  box-shadow:
+    0 8px 32px 0 rgba(18, 50, 73, 0.06),
+    0 2px 8px 0 rgba(18, 50, 73, 0.04),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.5);
+}
+
+.glass-shadow {
+  box-shadow:
+    0 8px 32px 0 rgba(18, 50, 73, 0.06),
+    0 2px 8px 0 rgba(18, 50, 73, 0.04),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.5);
+}
+
+.glass-shadow-hover {
+  box-shadow:
+    0 12px 48px 0 rgba(18, 50, 73, 0.1),
+    0 4px 16px 0 rgba(18, 50, 73, 0.06),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.6);
+}
+
+/* Ortiz-style pill button with clip-path fill */
+.btn-ortiz {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--forest);
+  border-radius: 300px;
+  background: transparent;
+  color: var(--forest);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  cursor: pointer;
+  overflow: hidden;
+  transition: color 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.btn-ortiz::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: 300px;
+  background: var(--forest);
+  clip-path: polygon(-2% 102%, 102% 102%, 102% 102%, -2% 102%);
+  transition: clip-path 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+  z-index: 0;
+}
+
+.btn-ortiz:hover {
+  color: var(--cream);
+}
+
+.btn-ortiz:hover::before {
+  clip-path: polygon(-2% -2%, 102% -2%, 102% 102%, -2% 102%);
+}
+
+.btn-ortiz > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Light variant for dark backgrounds */
+.btn-ortiz-light {
+  border-color: var(--cream);
+  color: var(--cream);
+}
+
+.btn-ortiz-light::before {
+  background: var(--cream);
+}
+
+.btn-ortiz-light:hover {
+  color: var(--forest);
+}
+
+/* Editorial utilities */
+.section-label {
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--orange-accent);
+}
+
+.editorial-hr {
+  border: none;
+  height: 1px;
+  background: rgba(18, 50, 73, 0.15);
+}
+
+/* Contact form input — designed for dark (bg-forest) backgrounds */
+.contact-input {
+  width: 100%;
+  background: rgba(243, 248, 251, 0.06);
+  border: 1px solid rgba(243, 248, 251, 0.18);
+  border-radius: 12px;
+  padding: 14px 18px;
+  color: var(--cream);
+  font-family: var(--font-cormorant), Georgia, serif;
+  font-size: 1.05rem;
+  outline: none;
+  transition:
+    border-color 0.25s ease,
+    background 0.25s ease;
+}
+
+.contact-input::placeholder {
+  color: rgba(243, 248, 251, 0.35);
+}
+
+.contact-input:focus {
+  border-color: var(--orange-accent);
+  background: rgba(243, 248, 251, 0.1);
+}
+
+/* Scrollbar hide utility */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Base styles */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--cream);
+  color: var(--forest);
+  font-family:
+    var(--font-inter),
+    system-ui,
+    -apple-system,
+    sans-serif;
+  overflow-x: hidden;
+}
+
+/* Accessibility: respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Glass fallback for browsers without backdrop-filter */
+@supports not (backdrop-filter: blur(20px)) {
+  .glass-panel {
+    background: rgba(255, 255, 255, 0.85);
+    border: 1px solid rgba(18, 50, 73, 0.1);
+  }
+}
+
+/* Mobile performance: reduce blur */
+@media (max-width: 768px) {
+  .glass-panel {
+    backdrop-filter: blur(12px) saturate(130%);
+    -webkit-backdrop-filter: blur(12px) saturate(130%);
+  }
+}
