@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Section } from "@/components/layout/Section";
 import { GlassButton } from "@/components/ui/GlassButton";
 import { siteConfig, getCopyright } from "@/site.config";
+import { isValidEmail, isValidPhone } from "@/lib/validation";
 
 type Status = "idle" | "loading" | "success" | "error";
 
@@ -15,19 +16,64 @@ const emptyFields = {
   message: "",
 };
 
+type FieldErrors = {
+  email?: string;
+  phone?: string;
+};
+
 export function ContactSection() {
   const [fields, setFields] = useState(emptyFields);
   const [status, setStatus] = useState<Status>("idle");
+  const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
   const { contact } = siteConfig;
+
+  function validateField(
+    name: "email" | "phone",
+    value: string,
+  ): string | undefined {
+    if (name === "email") {
+      if (!value.trim()) return contact.validation.emailRequired;
+      if (!isValidEmail(value)) return contact.validation.emailInvalid;
+    }
+    if (name === "phone") {
+      if (!value.trim()) return contact.validation.phoneRequired;
+      if (!isValidPhone(value)) return contact.validation.phoneInvalid;
+    }
+    return undefined;
+  }
 
   function handleChange(
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) {
-    setFields((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    const { name, value } = e.target;
+    setFields((prev) => ({ ...prev, [name]: value }));
+    if (name === "email" || name === "phone") {
+      setFieldErrors((prev) => ({ ...prev, [name]: undefined }));
+    }
+  }
+
+  function handleBlur(e: React.FocusEvent<HTMLInputElement>) {
+    const { name, value } = e.target;
+    if (name === "email" || name === "phone") {
+      setFieldErrors((prev) => ({
+        ...prev,
+        [name]: validateField(name, value),
+      }));
+    }
   }
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+
+    const errors: FieldErrors = {
+      email: validateField("email", fields.email),
+      phone: validateField("phone", fields.phone),
+    };
+    if (errors.email || errors.phone) {
+      setFieldErrors(errors);
+      return;
+    }
+
     setStatus("loading");
 
     try {
@@ -40,6 +86,7 @@ export function ContactSection() {
       if (res.ok) {
         setStatus("success");
         setFields(emptyFields);
+        setFieldErrors({});
       } else {
         setStatus("error");
       }
@@ -124,10 +171,14 @@ export function ContactSection() {
                 name="email"
                 value={fields.email}
                 onChange={handleChange}
+                onBlur={handleBlur}
                 placeholder={contact.placeholders.email}
                 required
-                className="contact-input"
+                className={`contact-input${fieldErrors.email ? " error" : ""}`}
               />
+              {fieldErrors.email && (
+                <p className="text-xs text-red-400">{fieldErrors.email}</p>
+              )}
             </div>
             <div className="space-y-2">
               <label className="text-cream/60 text-xs font-medium tracking-widest uppercase">
@@ -138,9 +189,14 @@ export function ContactSection() {
                 name="phone"
                 value={fields.phone}
                 onChange={handleChange}
+                onBlur={handleBlur}
                 placeholder={contact.placeholders.phone}
-                className="contact-input"
+                required
+                className={`contact-input${fieldErrors.phone ? " error" : ""}`}
               />
+              {fieldErrors.phone && (
+                <p className="text-xs text-red-400">{fieldErrors.phone}</p>
+              )}
             </div>
           </div>
 

@@ -156,13 +156,13 @@ export const siteConfig = {
   // --------------------------------------------------------------------------
   theme: {
     colors: {
-      cream: "#f3f8fb",
-      creamDark: "#e2edf4",
-      forest: "#123249",
-      forestLight: "#3a7ca5",
-      orangeAccent: "#d9784f",
-      goldWarm: "#c9a227",
-      marqueeBackground: "#cdeef0",
+      cream: "#f6efe1",
+      creamDark: "#e8dbc0",
+      forest: "#3b2a1d",
+      forestLight: "#8a5a3c",
+      orangeAccent: "#c1633b",
+      goldWarm: "#c08a2e",
+      marqueeBackground: "#ddcfae",
     },
     glass: {
       white: "rgba(255, 255, 255, 0.55)",
@@ -221,9 +221,9 @@ export const siteConfig = {
   // HERO (home page)
   // --------------------------------------------------------------------------
   hero: {
-    headline: ["Find Your", "Way Home."],
+    headline: ["A Gentle Path", "to Healing."],
     subtitle:
-      "Grounded, compassionate guidance for the questions life doesn't answer alone.",
+      "Calm, intuitive guidance to help you release, restore, and move forward.",
     imageUrl: "/images/hero.jpg",
   },
 
@@ -235,7 +235,7 @@ export const siteConfig = {
     headline: "Calm Guidance, Clearly Given",
     bio: "Mama Sanyu is the voice behind The Gifted Healer, offering calm, grounded guidance to clients across Johannesburg and Cape Town. Drawing on years of intuitive practice, she helps people find clarity around love, purpose, and the decisions that matter most — without drama, without judgment. Every conversation is private, unhurried, and centered on you. Whether you're facing a crossroads or simply need a clearer view of your own path, Mama Sanyu offers the kind of presence that helps you hear your own answers.",
     portrait: {
-      src: "/images/hero_10.jpg",
+      src: "/images/hero_9.jpg",
       alt: "The Gifted Healer",
     },
     tags: [
@@ -525,6 +525,12 @@ export const siteConfig = {
       phone: "+27 00 000 0000",
       message: "Tell me what you're seeking…",
     },
+    validation: {
+      emailRequired: "Email is required",
+      emailInvalid: "Please enter a valid email address",
+      phoneRequired: "Phone number is required",
+      phoneInvalid: "Please enter a valid phone number (e.g. +27 78 715 2631)",
+    },
     submitText: "Send Message",
     loadingText: "Sending…",
     successMessage: "Thanks! I'll be in touch soon.",
@@ -540,8 +546,8 @@ export const siteConfig = {
     marqueeText: "Begin Your Journey to Clarity Today",
     repeatCount: 6,
     ctaText: "BOOK ME",
-    backgroundColor: "#cdeef0",
-    textColor: "rgba(18, 50, 73, 0.55)",
+    backgroundColor: "#ddcfae",
+    textColor: "rgba(59, 42, 29, 0.55)",
   },
 
   // --------------------------------------------------------------------------

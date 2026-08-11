@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 import { siteConfig } from "@/site.config";
+import { isValidEmail, isValidPhone } from "@/lib/validation";
 
 const { email: emailConfig } = siteConfig;
 
@@ -16,9 +17,23 @@ export async function POST(req: NextRequest) {
 
   const { firstName, lastName, email, phone, message } = body;
 
-  if (!email || !message) {
+  if (!email || !phone || !message) {
     return NextResponse.json(
-      { error: "Email and message are required" },
+      { error: "Email, phone, and message are required" },
+      { status: 400 },
+    );
+  }
+
+  if (typeof email !== "string" || !isValidEmail(email)) {
+    return NextResponse.json(
+      { error: "Please enter a valid email address" },
+      { status: 400 },
+    );
+  }
+
+  if (typeof phone !== "string" || !isValidPhone(phone)) {
+    return NextResponse.json(
+      { error: "Please enter a valid phone number" },
       { status: 400 },
     );
   }

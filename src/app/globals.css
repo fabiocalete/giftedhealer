@@ -1,13 +1,13 @@
 @import "tailwindcss";
 
 :root {
-  /* Ocean Palette */
-  --cream: #f3f8fb;
-  --cream-dark: #e2edf4;
-  --forest: #123249;
-  --forest-light: #3a7ca5;
-  --orange-accent: #d9784f;
-  --gold-warm: #c9a227;
+  /* Earth Palette */
+  --cream: #f6efe1;
+  --cream-dark: #e8dbc0;
+  --forest: #3b2a1d;
+  --forest-light: #8a5a3c;
+  --orange-accent: #c1633b;
+  --gold-warm: #c08a2e;
 
   /* Glass system — light-mode (Apple frosted glass) */
   --glass-white: rgba(255, 255, 255, 0.55);
@@ -73,13 +73,13 @@
   0%,
   100% {
     box-shadow:
-      0 0 20px rgba(217, 120, 79, 0.15),
-      0 0 40px rgba(18, 50, 73, 0.1);
+      0 0 20px rgba(193, 99, 59, 0.15),
+      0 0 40px rgba(59, 42, 29, 0.1);
   }
   50% {
     box-shadow:
-      0 0 30px rgba(217, 120, 79, 0.25),
-      0 0 60px rgba(18, 50, 73, 0.15);
+      0 0 30px rgba(193, 99, 59, 0.25),
+      0 0 60px rgba(59, 42, 29, 0.15);
   }
 }
 
@@ -110,22 +110,22 @@
   -webkit-backdrop-filter: blur(20px) saturate(140%);
   border: 1px solid var(--glass-border);
   box-shadow:
-    0 8px 32px 0 rgba(18, 50, 73, 0.06),
-    0 2px 8px 0 rgba(18, 50, 73, 0.04),
+    0 8px 32px 0 rgba(59, 42, 29, 0.06),
+    0 2px 8px 0 rgba(59, 42, 29, 0.04),
     inset 0 1px 0 0 rgba(255, 255, 255, 0.5);
 }
 
 .glass-shadow {
   box-shadow:
-    0 8px 32px 0 rgba(18, 50, 73, 0.06),
-    0 2px 8px 0 rgba(18, 50, 73, 0.04),
+    0 8px 32px 0 rgba(59, 42, 29, 0.06),
+    0 2px 8px 0 rgba(59, 42, 29, 0.04),
     inset 0 1px 0 0 rgba(255, 255, 255, 0.5);
 }
 
 .glass-shadow-hover {
   box-shadow:
-    0 12px 48px 0 rgba(18, 50, 73, 0.1),
-    0 4px 16px 0 rgba(18, 50, 73, 0.06),
+    0 12px 48px 0 rgba(59, 42, 29, 0.1),
+    0 4px 16px 0 rgba(59, 42, 29, 0.06),
     inset 0 1px 0 0 rgba(255, 255, 255, 0.6);
 }
 
@@ -198,7 +198,7 @@
 .editorial-hr {
   border: none;
   height: 1px;
-  background: rgba(18, 50, 73, 0.15);
+  background: rgba(59, 42, 29, 0.15);
 }
 
 /* Contact form input — designed for dark (bg-forest) backgrounds */
@@ -224,6 +224,11 @@
 .contact-input:focus {
   border-color: var(--orange-accent);
   background: rgba(243, 248, 251, 0.1);
+}
+
+.contact-input.error,
+.contact-input.error:focus {
+  border-color: #f87171;
 }
 
 /* Scrollbar hide utility */
@@ -268,7 +273,7 @@ body {
 @supports not (backdrop-filter: blur(20px)) {
   .glass-panel {
     background: rgba(255, 255, 255, 0.85);
-    border: 1px solid rgba(18, 50, 73, 0.1);
+    border: 1px solid rgba(59, 42, 29, 0.1);
   }
 }
 
