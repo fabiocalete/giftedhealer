@@ -188,8 +188,8 @@ export const siteConfig = {
   // WHATSAPP
   // --------------------------------------------------------------------------
   whatsapp: {
-    phone: "27643207958",
-    displayPhone: "+27 64 320 7958",
+    phone: "27738223480",
+    displayPhone: "+27 73 822 3480",
     generalMessage:
       "Hi, I'm looking for some clarity and would love to connect.",
   },
